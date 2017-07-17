@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>tp_combat</title>
+</head>
+<style>
+.count {
+  display: flex;
+  justify-content: center;
+}
+.count>p {
+  padding: 10px;
+}
+.center {
+  text-align: center;
+}
+.mes_boutons {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+button {
+  padding: 10px;
+  box-sizing: border-box;
+  margin: 10px;
+}
+#attaque {
+  border: none;
+  background-color: #f1c40f;
+  color: white;
+}
+#special {
+  border: none;
+  background-color: #e74c3c;
+  color: white;
+}
+#heal {
+  border: none;
+  background-color: #3498db;
+  color: white;
+}
+</style>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+window.onload = function start() {
+  new Vue({
+    el: "#game",
+    data: {
+      title: "COMBAT DU TURFU",
+      countPlayer: 100,
+      countMonster: 100,
+      playerName:"Player Name",
+    },
+    methods: {
+      updateName: function(e) {
+        this.playerName = e.target.value;
+      },
+      attaque: function(a) {
+        this.countPlayer -= 15;
+        this.countMonster -= 10;
+      },
+      superAttaquePlayer(s) {
+        this.countMonster -= 30;
+        this.countPlayer -= 20;
+      },
+      heal: function(h) {
+        this.countPlayer += 30;
+        this.countPlayer -= 18;
+      }
+    }
+  });
+}
+
+</script>
+<body>
+  <div id="game">
+    <h2 class="center"> {{ title }}</h2>
+    <div class="center">
+      <input type="range" max="100" min="0" step="10" v-model="countPlayer">
+      <input type="range" max="100" min="0" step="10" v-model="countMonster">
+
+      <h4> {{ playerName }} </h4>
+      <div class="count">
+        <p class="text">
+          {{ countPlayer }}
+        </p>
+        <p class="text">
+          {{ countMonster }}
+        </p>
+      </div>
+      <div class="count">
+        <p v-if="countPlayer <= 30">
+          Vous avez été touché en plein coeur !
+        </p>
+        <p v-if="countMonster <= 60">
+          Vous avez infligé une sacré raclée !
+        </p>
+      </div>
+      <input type="text" @keyup.enter="updateName" placeholder="Votre pseudo">
+      <div class="mes_boutons">
+        <button name="attaque" @click="attaque" id="attaque"> Attaque</button>
+        <button name="special_attaque" @click="superAttaquePlayer" id="special"> Attaque spéciale</button>
+        <button name="heal" @click="heal" id="heal"> Heal</button>
+        <button name="reset" id="reset"> Reset </button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

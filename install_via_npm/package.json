@@ -1,0 +1,16 @@
+{
+  "name": "install_via_npm",
+  "version": "1.0.0",
+  "description": "un petit topo sur npm",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "moi@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "vue": "^2.3.3",
+    "font-awesome": "^4.7.0"
+  }
+
+}

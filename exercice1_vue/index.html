@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>exercice1_vue</title>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+  window.onload = function start() {
+    new Vue({
+      el: "#exercice-1",
+      data: {
+        title: "JS TP 2",
+        users:
+        // [
+          {name: "Hermione", age: 22},
+          // {name: "Harry", age: 25},
+          // {name: "Ron", age: 30},
+        // ],
+        // currentMsg: 0,
+        img: {
+          url: "https://i1.wp.com/www.absolumentchats.com/wp-content/uploads/2017/04/24261601_web.jpg?resize=350%2C200",
+          alt: "mon image",
+        },
+      },
+      methods: {
+        // next: function() {
+        //   if (this.currentMsg+1 < this.msgs.length) {
+        //     this.currentMsg++;
+        //   }
+        // },
+        getRandom: function() {
+          return Math.round(Math.random() * 100) / 100;
+        }
+      },
+    });
+  }
+
+  </script>
+</head>
+<body>
+
+  <div id="exercice-1">
+    <h1>{{ title }}</h1>
+    <!-- <p>Voici mes trois personnages</p> -->
+    <p class="users">
+      <!-- {{ user.name + user.age }} -->
+      {{ users.name }} {{ users.age }}
+    </p>
+    <p>Voici l'âge d'Hermione multiplié par 3</p>
+    <p class="users">
+      <!-- {{ users[currentMsg].name + users[currentMsg].age*3 }} -->
+      {{ users.age*3 }}
+    </p>
+    <p v-model="count">
+      {{ getRandom() }}
+    </p>
+    <!-- afficher le titre vue JS TP 2
+    1/ Remplir le p suivant avec vos noms et ages en utilisant l'interpolation de chaine
+    2/ afficher votre age multiplé par 3
+    3/ appeller une fonction pour afficher un nombre compris entre 0 et 1
+    4/ afficher une image de votre choix en utilisant un bind sur l'attribut src
+    5/ remplir l'input suivant avec votre nom en bindant sur l'attribut value -->
+    <img :src="img.url" :alt="img.alt"><br>
+    <input type="text" :value="users.name">
+  </div>
+  <!-- <script src="/dist/build.js"></script> -->
+</body>
+</html>

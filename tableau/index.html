@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .f-row {
+  display: flex;
+  }
+.action:hover {
+  color: darkorange;
+  cursor: pointer;
+}
+.text {
+  padding: 10px;
+  background: #d0d1d8;
+  border-radius: .3rem;
+  max-width: 320px;
+}
+.danger {
+  color: white;
+  background: firebrick;
+}
+.users {
+  color: blue;
+}
+.sup {
+  color: red;
+}
+  </style>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://use.fontawesome.com/98034faa37.js"></script>
+  <script>
+  // CODE VUE JS ICI
+  // console.log(Vue);
+
+  window.onload = function start() {
+    new Vue({
+      el: "#app",
+      data: {
+        title: "VueJS rocks !!!",
+        count: 0,
+        monObj: {maProp: "c'est comme d'hab!"},
+        users:[
+          {name: "Carapuce", age: 22},
+          {name: "Pikachu", age: 25},
+          {name: "Salamèche", age: 30},
+        ]
+      },
+
+  methods: {
+    onUpdateTitle: function(e) {
+      // console.log("on a saisi un caractère");
+      this.title = e.target.value;
+    },
+    updateCount: function(mode) {
+      this.count = mode === "incr" ? this.count += 10:
+      this.count -= 10;
+    },
+    getUserClass: function(u) {
+    return u.age > 25 ? "vieux" : "jeune";
+    },
+  }
+});
+}
+
+</script>
+</head>
+<body>
+  <section id="app">
+    <h1>{{ title }} - {{ count }}</h1>
+    <p>
+      Le symbole <code>{{}}</code> représente une "interpolation de chaîne".
+      Vous pouvez y placer nimporte qu'elle expression JS se resolvant en une chaine de cara
+    </p>
+    <p>
+      par exemple: {{ 1 + 1 }} (=> est le résultat d'un calcul)
+    </p>
+    <input type="text" v-on:input="onUpdateTitle($event)">
+    <p> Cette technique fonctionne mais on peut faire encore plus simple,
+      en mettant en oeuvre le 2way data-blinding </p>
+      <input type="text" v-model="title">
+      <p class="text" :class="{danger: count < 0}">
+        IL est facile de mettre a jour une valeur {{ count }}</p>
+        <p v-if="count > 0">
+          Its positive !
+        </p>
+        <p v-if="count < 0">
+          Its negative !
+        </p>
+        <input type="range" max="100" min="0" step="10" v-model="count">
+        <hr>
+        <div class="f-row">
+          <i class="action fa fa-caret-up fa-lg" aria-hidden="true" @click="updateCount('incr')"></i>
+          <i class="action fa fa-caret-down fa-lg" aria-hidden="true" @click="updateCount('decr')"></i>
+        </div>
+        <hr>
+        <ul class="list">
+          <li class="item" v-for="n in 100"> {{ n }} </li>
+        </ul>
+        <p>
+          {{ monObj.maProp }}
+        </p>
+        <p>
+          TP : Créer un tableau d'utilisateurs (object)<br>
+          AJoutez une prop name et une prop age <br>
+          Utilisez l'attribute v-for pour parcourir le tableau et afficher les résultats.
+          l'âge est sup à 25 afficher une class css de votre choix sinon une autre class css
+        </p>
+        <!-- <ul class="list_users">
+          <li class="users" v-for="user in users" :class="{sup: user.age > 25}">
+            {{ user.name}}  {{ user.age }}  </li>
+        </ul> -->
+<ul>
+  <li v-for="(user,i) in users" v-bind:class="getUserClass(user)">
+    <h2> user n° {{ i + 1}}</h2>
+    <!-- on parcourt chaque user dans users -->
+    <p v-for="(val, prop) in user">
+      <!-- on parcourt chaque propriété valeur de user -->
+      <span>{{ prop }}</span> : {{ val }}
+    </p>
+  </li>
+</ul>
+      </section>
+
+      <!-- vshow l'element est masqué en css -->
+    </body>
+    </html>
