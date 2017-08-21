@@ -62,8 +62,8 @@
       this.title = e.target.value;
     },
     updateCount: function(mode) {
-      this.count = mode === "incr" ? this.count += 10:
-      this.count -= 10;
+      this.count = mode === "incr" ? this.count += 1:
+      this.count -= 1;
     },
     getUserClass: function(u) {
     return u.age > 25 ? "vieux" : "jeune";
